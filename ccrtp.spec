@@ -17,7 +17,6 @@ BuildRequires:	libgcrypt-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	doxygen
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Common C++ RTP stack
