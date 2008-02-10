@@ -1,12 +1,11 @@
-%define major 1.5
+%define major 0
 %define libname %mklibname %{name} %major
-
-#%define __libtoolize /bin/true
+%define develname %mklibname %{name} -d
 
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
-Version: 	1.5.1
-Release: 	%mkrel 2
+Version: 	1.6.0
+Release: 	%mkrel 1
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
@@ -26,20 +25,18 @@ Common C++ RTP stack
 Summary:        Dynamic libraries from %{name}
 Group:          System/Libraries
 Provides:	%{name}
-Obsoletes:	%{name} = %{version}-%{release}
 
 %description -n %{libname}
 Dynamic libraries from %{name}.
 
-%package -n 	%{libname}-devel
+%package -n 	%{develname}
 Summary: 	Header files and static libraries from %{name}
 Group: 		Development/C
-Requires: 	%{libname} >= %{version}
+Requires: 	%{libname} = %{version}
 Provides: 	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
-Obsoletes: 	%{name}-devel
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Libraries and includes files for developing programs based on %{name}.
 
 %prep
@@ -59,10 +56,10 @@ rm -rf %{buildroot}
 
 %postun -n %{libname} -p /sbin/ldconfig
 
-%post -n %{libname}-devel
+%post -n %{develname}
 %_install_info %{name}.info
 
-%postun -n %{libname}-devel
+%postun -n %{develname}
 %_remove_install_info %{name}.info
 
 %clean
@@ -70,9 +67,10 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}
+%{_libdir}/*.so.%{major}.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/*
 %{_libdir}/*.so
