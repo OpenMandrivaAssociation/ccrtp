@@ -1,15 +1,15 @@
-%define major 0
+%define major 1
 %define libname %mklibname %{name} %major
 %define develname %mklibname %{name} -d
 
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
-Version: 	1.6.0
-Release: 	%mkrel 3
+Version: 	1.6.1
+Release: 	%mkrel 1
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
-Source0:	ftp://ftp.gnu.org/pub/gnu/ccrtp/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnu.org/pub/gnu/ccrtp/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf2.5
 BuildRequires:	libCommonC++-devel
 BuildRequires:	libgcrypt-devel
