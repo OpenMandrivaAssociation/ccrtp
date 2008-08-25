@@ -4,9 +4,9 @@
 
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
-Version: 	1.6.1
+Version: 	1.6.2
 Release: 	%mkrel 1
-License:	GPL
+License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
 Source0:	ftp://ftp.gnu.org/pub/gnu/ccrtp/%{name}-%{version}.tar.gz
