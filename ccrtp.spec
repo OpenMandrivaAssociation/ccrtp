@@ -1,11 +1,12 @@
+%define api 1.6
 %define major 1
-%define libname %mklibname %{name} %major
+%define libname %mklibname %{name} %{api} %{major}
 %define develname %mklibname %{name} -d
 
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
 Version: 	1.6.2
-Release: 	%mkrel 2
+Release: 	%mkrel 3
 License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
@@ -25,6 +26,7 @@ Common C++ RTP stack
 Summary:        Dynamic libraries from %{name}
 Group:          System/Libraries
 Provides:	%{name} = %version
+Obsoletes:	%{mklibname ccrtp 1} < %{version}-%{release}
 
 %description -n %{libname}
 Dynamic libraries from %{name}.
@@ -32,7 +34,7 @@ Dynamic libraries from %{name}.
 %package -n 	%{develname}
 Summary: 	Header files and static libraries from %{name}
 Group: 		Development/C
-Requires: 	%{libname} = %{version}
+Requires: 	%{libname} = %{version}-%{release}
 Provides: 	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname -d ccrtp 1.5}
