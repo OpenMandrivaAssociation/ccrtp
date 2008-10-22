@@ -5,7 +5,7 @@
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
 Version: 	1.6.2
-Release: 	%mkrel 1
+Release: 	%mkrel 2
 License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
@@ -24,7 +24,7 @@ Common C++ RTP stack
 %package -n 	%{libname}
 Summary:        Dynamic libraries from %{name}
 Group:          System/Libraries
-Provides:	%{name}
+Provides:	%{name} = %version
 
 %description -n %{libname}
 Dynamic libraries from %{name}.
@@ -34,7 +34,8 @@ Summary: 	Header files and static libraries from %{name}
 Group: 		Development/C
 Requires: 	%{libname} = %{version}
 Provides: 	lib%{name}-devel = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release} 
+Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname -d ccrtp 1.5}
 
 %description -n %{develname}
 Libraries and includes files for developing programs based on %{name}.
@@ -43,14 +44,14 @@ Libraries and includes files for developing programs based on %{name}.
 %setup -q
 
 %build
-export CXXFLAGS="-fpermissive"$CXXFLAGS
+export CXXFLAGS="-fpermissive %{optflags}"
 %configure2_5x
-%make
-										
+%make LIBTOOL=%_bindir/libtool
+
 %install
 rm -rf %{buildroot}
 
-%makeinstall
+%makeinstall_std
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
