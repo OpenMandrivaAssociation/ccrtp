@@ -6,7 +6,7 @@
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
 Version: 	1.7.1
-Release: 	%mkrel 1
+Release: 	%mkrel 2
 License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
