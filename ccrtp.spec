@@ -1,22 +1,22 @@
-%define api 1.7
+%define api 2.0
 %define major 0
 %define libname %mklibname %{name} %{api} %{major}
 %define develname %mklibname %{name} -d
 
 Summary: 	Common C++ RTP stack
 Name: 	 	ccrtp
-Version: 	1.7.1
-Release: 	%mkrel 4
+Version: 	2.0.3
+Release: 	1
 License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.gnu.org/software/ccrtp/
 Source0:	ftp://ftp.gnu.org/pub/gnu/ccrtp/%{name}-%{version}.tar.gz
+BuildRequires:	ucommon-devel
 BuildRequires:	libCommonC++-devel
 BuildRequires:	libgcrypt-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	doxygen
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Common C++ RTP stack
@@ -24,8 +24,8 @@ Common C++ RTP stack
 %package -n 	%{libname}
 Summary:        Dynamic libraries from %{name}
 Group:          System/Libraries
-Provides:	%{name} = %version
-Obsoletes:	%{mklibname ccrtp 1} < %{version}-%{release}
+Provides:	%{name} = %{EVRD}
+Obsoletes:	%{mklibname ccrtp 1} < %{EVRD}
 
 %description -n %{libname}
 Dynamic libraries from %{name}.
@@ -34,8 +34,8 @@ Dynamic libraries from %{name}.
 Summary: 	Header files and static libraries from %{name}
 Group: 		Development/C
 Requires: 	%{libname} = %{version}-%{release}
-Provides: 	lib%{name}-devel = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Provides: 	lib%{name}-devel = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 Obsoletes:	%{mklibname -d ccrtp 1.5}
 
 %description -n %{develname}
@@ -50,29 +50,9 @@ export CXXFLAGS="-fpermissive %{optflags}"
 %make LIBTOOL=%_bindir/libtool
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%post -n %{develname}
-%_install_info %{name}.info
-
-%postun -n %{develname}
-%_remove_install_info %{name}.info
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}
 %{_libdir}/*.so.%{major}.*
 
@@ -81,8 +61,5 @@ rm -rf %{buildroot}
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/pkgconfig/*.pc
 %{_infodir}/*
-
-
