@@ -60,6 +60,5 @@ export CXXFLAGS="-fpermissive %{optflags}"
 %defattr(-,root,root)
 %{_includedir}/*
 %{_libdir}/*.so
-%{_libdir}/*.a
 %{_libdir}/pkgconfig/*.pc
 %{_infodir}/*
