@@ -46,8 +46,11 @@ Libraries and includes files for developing programs based on %{name}.
 
 %build
 export CXXFLAGS="-fpermissive %{optflags}"
-%configure2_5x
-%make LIBTOOL=%_bindir/libtool
+%configure2_5x --disable-static
+%make 
+# disable or we have 4.7.2/../../../../lib64/crti.o: No such file or directory
+# why we use this?
+# LIBTOOL=% _bindir/libtool
 
 %install
 %makeinstall_std
