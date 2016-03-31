@@ -1,12 +1,11 @@
-%define api	2.0
-%define major	0
-%define libname %mklibname %{name} %{api} %{major}
+%define major	3
+%define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
 
 Summary:	Common C++ RTP stack
 Name:		ccrtp
-Version:	2.0.5
-Release:	3
+Version:	2.1.2
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.gnu.org/software/ccrtp/
